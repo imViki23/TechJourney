@@ -2,14 +2,14 @@
 
 ## Docker
 
-| Description         | Example                                                                                                   |
-|---------------------|-----------------------------------------------------------------------------------------------------------|
-| Pull image          | `docker pull mysql:8.2.0`                                                                                 |
-| Create a container  | `docker run --name MySQLInstance -e MYSQL_ROOT_PASSWORD=root123 -p 3306:3306 -p 3306:3306 -d mysql:8.2.0` |
-| List all containers | `docker ps -a`                                                                                            |
-| Start a container   | `docker start 16c1e28cc1cf`                                                                               |
-| Stop a container    | `docker stop 16c1e28cc1cf`                                                                                |
-| Remove a container  | `docker rm MySQLInstance`                                                                                 |
+| Description         | Example                                                                                                         |
+|---------------------|-----------------------------------------------------------------------------------------------------------------|
+| Pull image          | `docker pull mysql:8.2.0`                                                                                       |
+| Create a container  | `docker run --name VikiMySQLInstance -e MYSQL_ROOT_PASSWORD=password123 -p 3306:3306 -p 33060:33060 -d mysql:8.2.0` |
+| List all containers | `docker ps -a`                                                                                                  |
+| Start a container   | `docker start 16c1e28cc1cf` # container id                                                                      |
+| Stop a container    | `docker stop 16c1e28cc1cf` # container id                                                                       |
+| Remove a container  | `docker rm MySQLInstance` # container name                                                                      |
 
 ## MySQL
 

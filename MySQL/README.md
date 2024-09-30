@@ -1,56 +1,61 @@
-# MySQL Journey
+# MySQL
 
 ## Problem statement
 
-The goal is to manage employees for an IT organization.
+The goal is to design database for managing students for an university named Viki.
 
-#### Database management
+#### Database administration
 
 This was categorized using the following roles:
 
 - **admin**: 
   - Has high-level access to the entire MySQL account, serving as an alternative to `root`.
-  - Manages users.
-- **developer**:
-  - Has high-level access only to the `my_organization` database.
+- **architect**:
+  - Has high-level access only to the `viki_university` database.
   - Manages tables.
 - **analyst**:
-  - Has read-only access to the `my_organization` database.
-  - Accesses data.
+  - Has read-only access to the `viki_university` database.
+  - Only Accesses data.
 - **app**:
-  - Similar to `developer`, but this role is intended for applications like microservices, not physical users.
+  - Similar to `architect`, but this role is intended for applications like microservices, not physical users.
 
 #### Tables
 
-- **employees**: Contains information about employees.
+- **students**: Contains information about students.
   - `id`: Six-digit unique primary key with auto-increment.
-  - `name`: Name of the employee.
-  - `password`: Employee's password.
-  - `role_id`: Foreign key linked to the `roles` table.
+  - `name`: Name of the student.
+  - `password`: Student's password.
+  - `course_id`: Foreign key linked to the `courses` table.
 
-- **roles**: Contains information about employee roles.
+- **course**: Contains information about courses.
   - `id`: Unique string identifier.
-  - `name`: Name of the role.
+  - `name`: Name of the course.
 
-- **address**: Contains the address of employees.
-  - `id`: Shared primary key, which is the primary key of the `employees` table. Since the address is unique, it's better to have a shared primary key.
+- **address**: Contains the address of students.
+  - `id`: Shared primary key, which is the primary key of the `students` table. Since the address is unique, it's better to have a shared primary key.
   - `area`: Area of the address.
   - `pin_code`: PIN code of the address.
 
-## Start MySQL
+- **assets**: Contains asset details of students like laptop, keyboard, mouse etc.
+  - `id`: Unique auto increment id
+  - `name`: Asset name
+  - `category`: Asset category like laptop or mouse
+  - `student_id`: Foreign key linked to the `students` table.
+
+## Steps
+
+### 1. Start MySQL as ROOT
 
 ```batch
 mysql -h localhost -P 3306 -u root -p // Enter password in prompt
-mysql -h localhost -P 3306 -u root -p"test123" // Password in command line
 ```
 
-## Create role and assign grants
+### 2. Create admin role and assign to user and login to mysql as admin
 
 - In below example admin role created using ROOT account.
 - SQL can be logged in as multiple user, the default user is ROOT.
 - But Database administrator, should not use ROOT as credentials.
 - Using ROOT credentials, create ADMIN role, create users and assign ADMIN role to them.
-- With this admin role create further roles and users.
 
 ```sql
 -- Create admin role and grant access to whole
@@ -59,84 +64,160 @@ GRANT ALL PRIVILEGES ON *.* TO 'admin'@'%';
 GRANT CREATE USER, CREATE ROLE, GRANT OPTION ON *.* TO 'admin'@'%'; -- Above grant is not enough for creating role and user
 FLUSH PRIVILEGES;
 
--- Create other supporting roles and grant access to only my_organization database
-CREATE ROLE 'developer';
-GRANT ALL PRIVILEGES ON my_organization.* TO 'developer'@'%';
-CREATE ROLE 'app';
-GRANT ALL PRIVILEGES ON my_organization.* TO 'app'@'%';
-CREATE ROLE 'analyst';
-GRANT SELECT ON my_organization.* TO 'analyst'@'%';
-FLUSH PRIVILEGES;
-```
-
-## Create user and assign roles
-
-```sql
-CREATE USER 'imViki23'@'%' IDENTIFIED BY 'imViki23123';
+-- Admin
+CREATE USER 'imViki23'@'%' IDENTIFIED BY 'password123';
 GRANT 'admin'@'%' TO 'imViki23'@'%';
 SET DEFAULT ROLE 'admin'@'%' TO 'imViki23'@'%';
 FLUSH PRIVILEGES;
 ```
 
-## Create and Use database
+### 3. Start MySQL as imViki23 (admin)
+
+```batch
+mysql -h localhost -P 3306 -u imViki23 -p // Enter password in prompt
+```
+
+### 4. Admin creates database
 
 ```sql
-CREATE DATABASE my_organization;
-CREATE DATABASE my_no_access_organization; -- only admin have access, not developer, app and analyst
-
+CREATE DATABASE viki_university;
 -- Switch between databases
-USE my_organization;
+USE viki_university;
 ```
 
-## Create table
+### 5. Admin creates supporting roles
+
+- With this admin role create further roles and users.
 
 ```sql
-CREATE TABLE employees (
+
+-- Architect
+CREATE ROLE 'architect';
+GRANT ALL PRIVILEGES ON viki_university.* TO 'architect'@'%';
+
+-- App
+CREATE ROLE 'app';
+GRANT ALL PRIVILEGES ON viki_university.* TO 'app'@'%';
+
+-- Analyst
+CREATE ROLE 'analyst';
+GRANT SELECT ON viki_university.* TO 'analyst'@'%'; -- Only READ access to analyst so GRANT SELECT ON
+
+FLUSH PRIVILEGES;
+```
+
+### 6. Admin creates users and assign roles
+
+```sql
+
+-- Karikalan is an architect, only he is person who has special access to university database
+CREATE USER 'karikalan' @'%' IDENTIFIED BY 'password123';
+GRANT 'architect' @'%' TO 'karikalan' @'%';
+SET DEFAULT ROLE 'architect' @'%' TO 'karikalan' @'%';
+
+-- karuvaki is just an analyst, he can just view database content because he has analyst role
+CREATE USER 'karuvaki' @'%' IDENTIFIED BY 'password123';
+GRANT 'analyst' @'%' TO 'karuvaki' @'%';
+SET DEFAULT ROLE 'analyst' @'%' TO 'karuvaki' @'%';
+
+-- Microservice 1 needs app role, because app is not a physical user
+CREATE USER 'microservice_1' @'%' IDENTIFIED BY 'password123';
+GRANT 'app' @'%' TO 'microservice_1' @'%';
+SET DEFAULT ROLE 'app' @'%' TO 'microservice_1' @'%';
+
+FLUSH PRIVILEGES;
+```
+
+### 7. Start MySQL as karikalan (architect)
+
+Stop using even **admin** role going forward. **architect** should design tables.
+
+```batch
+mysql -h localhost -P 3306 -u karikalan -p // Enter password in prompt
+```
+
+### 7. Architect creates tables
+
+```sql
+
+USE viki_university;
+
+CREATE TABLE courses (
+    id VARCHAR(100) PRIMARY KEY,
+    name VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE students (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    first_name VARCHAR(50) NOT NULL,
-    last_name VARCHAR(50) NOT NULL,
-    role_id VARCHAR(100) NOT NULL,
-    FOREIGN KEY (role_id) REFERENCES roles(id)
+    password VARCHAR(100) NOT NULL,
+    name VARCHAR(50) NOT NULL,
+    course_id VARCHAR(100) NOT NULL,
+    FOREIGN KEY (course_id) REFERENCES courses(id)
 ) AUTO_INCREMENT = 100000;
-```
 
-## Alter table
+CREATE TABLE address (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    area VARCHAR(50) NOT NULL,
+    pin_code VARCHAR(6) NOT NULL,
+    FOREIGN KEY (id) REFERENCES students(id)
+);
 
-```sql
+CREATE TABLE assets (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(50) NOT NULL,
+    category VARCHAR(10) NOT NULL,
+    student_id INT NOT NULL,
+    FOREIGN KEY (student_id) REFERENCES students(id)
+);
+
+-- Below are alter command examples
+
 -- Add column with foreign key support
-ALTER TABLE employees
-ADD COLUMN role_id INT,
-ADD FOREIGN KEY (role_id) REFERENCES roles(id);
+-- ALTER TABLE employees
+-- ADD COLUMN role_id INT,
+-- ADD FOREIGN KEY (role_id) REFERENCES roles(id);
 
 -- Modify column, here not null is added
-ALTER TABLE employees
-MODIFY COLUMN role_id INT NOT NULL;
+-- ALTER TABLE employees
+-- MODIFY COLUMN role_id INT NOT NULL;
 
 -- Drop foreign key constraint
-ALTER TABLE employees DROP FOREIGN KEY employees_ibfk_1;
+-- ALTER TABLE employees DROP FOREIGN KEY employees_ibfk_1;
 
 -- Drop column
-ALTER TABLE employees DROP COLUMN role_id;
+-- ALTER TABLE employees DROP COLUMN role_id;
 ```
 
-## Insert data
+### 8. Microservice inserts data through web or mobile app / Architect inserts data manually
 
 ```sql
--- Simple data insertion
-INSERT INTO roles (id, name) VALUES ('manager', 'Manager');
+INSERT INTO courses (id, name) VALUES ('ECE', 'Electronics and Communication Engineering');
+INSERT INTO courses (id, name) VALUES ('MECH', 'Mechanical Engineering');
+INSERT INTO courses (id, name) VALUES ('CSE', 'Computer Science Engineering');
 
--- Shared primary key example insertion
-INSERT INTO employees (first_name, last_name, role_id) VALUES ('Adam', 'Lee', 'hr');
-SET @employee_id = LAST_INSERT_ID(); -- Shared primary key, so use employee table primary key in address table
-INSERT INTO address (id, door_no, street, area, city, state, country, pin_code)
-    VALUES (@employee_id, '1234', 'Rkm street', 'Playfield', 'Anytowm', 'Anystate', 'Anycountry', '123456');
+-- $2a$10$3N2ZjQ7AFhIyJWLYcIq4O.A9B4LqCsPfv9YA/RvSCxTxkfaGm2 decodes to neduncheliyan
+INSERT INTO students (password, name, course_id) VALUES ('$2a$10$3N2ZjQ7AFhIyJWLYcIq4O.A9B4LqCsPfv9YA/RvSCxTxkfaGm2', 'Neduncheliyan', 'ECE');
+SET @student_id = LAST_INSERT_ID(); -- Shared primary key, so use student table primary key in address table
+INSERT INTO address (id, area, pin_code) VALUES (@student_id, 'Bodi', '456');
+INSERT INTO assets(name, category, student_id) VALUES ('HP Pavilion 15', 'LAPTOP', @student_id);
+INSERT INTO assets(name, category, student_id) VALUES ('HP Pavilion Keyboard 1', 'KEYBOARD', @student_id);
+
+-- $2a$10$Fh8zInGfx5QJL5dPlOk0heLsr.xQYmRyQ7wYRmsxDyLI0Ass1assC decodes to karikalan
+INSERT INTO students (password, name, course_id) VALUES ('$2a$10$Fh8zInGfx5QJL5dPlOk0heLsr.xQYmRyQ7wYRmsxDyLI0Ass1assC', 'karikalan', 'MECH');
+SET @student_id = LAST_INSERT_ID(); -- Shared primary key, so use student table primary key in address table
+INSERT INTO address (id, area, pin_code) VALUES (@student_id, 'Theni', '453567');
+INSERT INTO assets(name, category, student_id) VALUES ('Dell Mouse 13', 'MOUSE', @student_id);
 ```
 
-## Utils
+### 9. Try it out
+
+- Login in as **karuvaki** and try inserting data into tables, you will get access denied error for karuvaki, because she has only **analyst** role which has only READ access to tables.
+
+### 10. Utils
 
 ```sql
 -- Truncate table disabling foreign key checks
 SET FOREIGN_KEY_CHECKS = 0;
-TRUNCATE TABLE employees;
+TRUNCATE TABLE students;
 SET FOREIGN_KEY_CHECKS = 1;
 ```
