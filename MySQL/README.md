@@ -27,7 +27,7 @@ This was categorized using the following roles:
   - `password`: Student's password.
   - `course_id`: Foreign key linked to the `courses` table.
 
-- **course**: Contains information about courses.
+- **courses**: Contains information about courses.
   - `id`: Unique string identifier.
   - `name`: Name of the course.
 
@@ -136,7 +136,7 @@ Stop using even **admin** role going forward. **architect** should design tables
 mysql -h localhost -P 3306 -u karikalan -p // Enter password in prompt
 ```
 
-### 7. Architect creates tables
+### 8. Architect creates tables
 
 ```sql
 
@@ -188,7 +188,7 @@ CREATE TABLE assets (
 -- ALTER TABLE employees DROP COLUMN role_id;
 ```
 
-### 8. Microservice inserts data through web or mobile app / Architect inserts data manually
+### 9. Microservice inserts data through web or mobile app / Architect inserts data manually
 
 ```sql
 INSERT INTO courses (id, name) VALUES ('ECE', 'Electronics and Communication Engineering');
@@ -198,7 +198,7 @@ INSERT INTO courses (id, name) VALUES ('CSE', 'Computer Science Engineering');
 -- $2a$10$3N2ZjQ7AFhIyJWLYcIq4O.A9B4LqCsPfv9YA/RvSCxTxkfaGm2 decodes to neduncheliyan
 INSERT INTO students (password, name, course_id) VALUES ('$2a$10$3N2ZjQ7AFhIyJWLYcIq4O.A9B4LqCsPfv9YA/RvSCxTxkfaGm2', 'Neduncheliyan', 'ECE');
 SET @student_id = LAST_INSERT_ID(); -- Shared primary key, so use student table primary key in address table
-INSERT INTO address (id, area, pin_code) VALUES (@student_id, 'Bodi', '456');
+INSERT INTO address (id, area, pin_code) VALUES (@student_id, 'Thanjai', '234566');
 INSERT INTO assets(name, category, student_id) VALUES ('HP Pavilion 15', 'LAPTOP', @student_id);
 INSERT INTO assets(name, category, student_id) VALUES ('HP Pavilion Keyboard 1', 'KEYBOARD', @student_id);
 
@@ -209,11 +209,11 @@ INSERT INTO address (id, area, pin_code) VALUES (@student_id, 'Theni', '453567')
 INSERT INTO assets(name, category, student_id) VALUES ('Dell Mouse 13', 'MOUSE', @student_id);
 ```
 
-### 9. Try it out
+### 10. Try it out
 
 - Login in as **karuvaki** and try inserting data into tables, you will get access denied error for karuvaki, because she has only **analyst** role which has only READ access to tables.
 
-### 10. Utils
+### 11. Utils
 
 ```sql
 -- Truncate table disabling foreign key checks
