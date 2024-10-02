@@ -1,4 +1,4 @@
-package com.mvwaran.jpa.entities;
+package com.viki.jpa.entities;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

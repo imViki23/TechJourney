@@ -1,8 +1,8 @@
-package com.mvwaran.jpa.controllers;
+package com.viki.jpa.controllers;
 
-import com.mvwaran.jpa.dto.Employee;
-import com.mvwaran.jpa.dto.EmployeeRequest;
-import com.mvwaran.jpa.services.EmployeeService;
+import com.viki.jpa.dto.Employee;
+import com.viki.jpa.dto.EmployeeRequest;
+import com.viki.jpa.services.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

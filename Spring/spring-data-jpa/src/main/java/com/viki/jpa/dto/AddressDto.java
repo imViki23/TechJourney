@@ -1,4 +1,4 @@
-package com.mvwaran.jpa.dto;
+package com.viki.jpa.dto;
 
 import lombok.Builder;
 import lombok.Data;

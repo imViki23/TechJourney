@@ -1,4 +1,4 @@
-package com.mvwaran.jpa.dto;
+package com.viki.jpa.dto;
 
 import lombok.Builder;
 import lombok.Data;
@@ -7,10 +7,10 @@ import java.util.List;
 
 @Data
 @Builder
-public class Employee {
+public class Student {
     private Integer id;
     private String name;
-    private Address address;
+    private AddressDto addressDto;
     private Role role;
-    private List<Asset> assets;
+    private List<AssetDto> assetDtos;
 }

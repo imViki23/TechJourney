@@ -1,12 +1,13 @@
-package com.mvwaran.jpa.services;
+package com.viki.jpa.services;
 
-import com.mvwaran.jpa.constants.AssetCategory;
+import com.viki.jpa.constants.AssetCategory;
 import com.mvwaran.jpa.dto.*;
-import com.mvwaran.jpa.entities.AddressEntity;
-import com.mvwaran.jpa.entities.EmployeeEntity;
-import com.mvwaran.jpa.entities.RoleEntity;
-import com.mvwaran.jpa.repositories.EmployeeRepository;
-import com.mvwaran.jpa.repositories.RoleRepository;
+import com.viki.jpa.dto.*;
+import com.viki.jpa.entities.AddressEntity;
+import com.viki.jpa.entities.EmployeeEntity;
+import com.viki.jpa.entities.RoleEntity;
+import com.viki.jpa.repositories.EmployeeRepository;
+import com.viki.jpa.repositories.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

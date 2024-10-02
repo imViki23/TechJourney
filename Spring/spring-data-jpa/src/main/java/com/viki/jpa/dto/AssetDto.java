@@ -1,6 +1,6 @@
-package com.mvwaran.jpa.dto;
+package com.viki.jpa.dto;
 
-import com.mvwaran.jpa.constants.AssetCategory;
+import com.viki.jpa.constants.AssetCategory;
 import lombok.Builder;
 import lombok.Data;
 

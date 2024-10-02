@@ -1,11 +1,11 @@
-package com.mvwaran.jpa.dto;
+package com.viki.jpa.dto;
 
 import lombok.Builder;
 import lombok.Data;
 
 @Data
 @Builder
-public class Role {
+public class RoleDto {
     private String id;
     private String name;
 }
