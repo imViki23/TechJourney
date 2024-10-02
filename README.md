@@ -2,6 +2,7 @@
 
 ## Table of contents
 
+- [MySQL](./MySQL/README.md)
 - [Cryptography](./Cryptography/README.md)
     - Encryption and Decryption of Data
         - [Using RSA](./Cryptography/EncryptionDecryption/RSA/README.md)
