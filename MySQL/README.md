@@ -9,44 +9,44 @@ The goal is to design database for managing students for an university named Vik
 This was categorized using the following roles:
 
 - **admin**: 
-  - Has high-level access to the entire MySQL account, serving as an alternative to `root`.
+  - Has high-level access to the entire MySQL account, serving as an alternative to **root**.
 - **architect**:
-  - Has high-level access only to the `viki_university` database.
+  - Has high-level access only to the **viki_university** database.
   - Manages tables.
 - **analyst**:
-  - Has read-only access to the `viki_university` database.
+  - Has read-only access to the **viki_university** database.
   - Only Accesses data.
 - **app**:
-  - Similar to `architect`, but this role is intended for applications like microservices, not physical users.
+  - Similar to **architect**, but this role is intended for applications like microservices, not physical users.
 
 #### Tables
 
 - **students**: Contains information about students.
-  - `id`: Six-digit unique primary key with auto-increment.
-  - `name`: Name of the student.
-  - `password`: Student's password.
-  - `course_id`: Foreign key linked to the `courses` table.
+  - **id**: Six-digit unique primary key with auto-increment.
+  - **name**: Name of the student.
+  - **password**: Student's password.
+  - **course_id**: Foreign key linked to the **courses** table.
 
 - **courses**: Contains information about courses.
-  - `id`: Unique string identifier.
-  - `name`: Name of the course.
+  - **id**: Unique string identifier.
+  - **name**: Name of the course.
 
 - **address**: Contains the address of students.
-  - `id`: Shared primary key, which is the primary key of the `students` table. Since the address is unique, it's better to have a shared primary key.
-  - `area`: Area of the address.
-  - `pin_code`: PIN code of the address.
+  - **id**: Shared primary key, which is the primary key of the **students** table. Since the address is unique, it's better to have a shared primary key.
+  - **area**: Area of the address.
+  - **pin_code**: PIN code of the address.
 
 - **assets**: Contains asset details of students like laptop, keyboard, mouse etc.
-  - `id`: Unique auto increment id
-  - `name`: Asset name
-  - `category`: Asset category like laptop or mouse
-  - `student_id`: Foreign key linked to the `students` table.
+  - **id**: Unique auto increment id
+  - **name**: Asset name
+  - **category**: Asset category like laptop or mouse
+  - **student_id**: Foreign key linked to the **students** table.
 
 ## Steps
 
 ### 1. Start MySQL as ROOT
 
-```batch
+```shell
 mysql -h localhost -P 3306 -u root -p // Enter password in prompt
 ```
 
