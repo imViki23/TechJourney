@@ -1,6 +1,6 @@
 # Encryption and Decryption of data using RSA keys
 
-RSA stand for (Rivest-Shamir-Adleman) is a *Asymmetric Encryption Algorithm*, which use a pair of keys for encryption and decryption: a public key and a private key. The public key is used to encrypt the data, and the private key is used to decrypt it.
+> RSA stand for (Rivest-Shamir-Adleman) is a *Asymmetric Encryption Algorithm*, which use a pair of keys for encryption and decryption: a public key and a private key. The public key is used to encrypt the data, and the private key is used to decrypt it.
 
 ## Steps
 

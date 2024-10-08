@@ -1,6 +1,6 @@
 # Spring Boot Journey
 
-The goal is to create a spring boot service for managing students for an university named Viki.
+> The goal is to create a spring boot service for managing students for an university named Viki.
 
 ## Steps
 

@@ -1,8 +1,6 @@
 # MySQL
 
-## Problem statement
-
-The goal is to design database for managing students for an university named Viki.
+> The goal is to design database for managing students for an university named Viki.
 
 #### Database administration
 

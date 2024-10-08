@@ -1,6 +1,6 @@
 # Digital Certificate
 
-Digital certificates, also known as SSL/TLS certificates or X.509 certificates, are electronic credentials that validate the identity of a website, server, device, or user over the internet. They play a critical role in ensuring secure communication, data integrity, and authentication in various online transactions and interactions.
+> Digital certificates, also known as SSL/TLS certificates or X.509 certificates, are electronic credentials that validate the identity of a website, server, device, or user over the internet. They play a critical role in ensuring secure communication, data integrity, and authentication in various online transactions and interactions.
 
 ## Steps to generate a digital certificate
 

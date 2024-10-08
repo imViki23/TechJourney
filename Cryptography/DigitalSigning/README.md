@@ -1,6 +1,6 @@
 # Digital Signing
 
-Digital signing ensures the authenticity, integrity of digital data, such as documents, messages, software, and transactions. It involves the use of cryptographic keys (private and public keys) to create a digital signature that uniquely identifies the signer and verifies the integrity of the signed data.
+> Digital signing ensures the authenticity, integrity of digital data, such as documents, messages, software, and transactions. It involves the use of cryptographic keys (private and public keys) to create a digital signature that uniquely identifies the signer and verifies the integrity of the signed data.
 
 ## Steps
 

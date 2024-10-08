@@ -1,6 +1,6 @@
 # Cryptography
 
-Goal is to design a secure server-to-server communication architecture using Public Key Infrastructure (PKI).
+> Goal is to design a secure server-to-server communication architecture using Public Key Infrastructure (PKI).
 
 ## Components
 
