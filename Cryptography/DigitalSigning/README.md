@@ -7,7 +7,7 @@
 ### Step 1: Generate a private key using openssl
 
 ```bash
-openssl genrsa -out test_private_key.pem 2048
+openssl genrsa -out test_private_key.key 2048
 ```
 
 Output of the private key contains Base64 encoded data of RSA components like modulus and exponents in PEM file format. <sup>[(What is PEM file format?)](../FAQ.md#what-is-pem-file-format)</sup>
@@ -15,7 +15,7 @@ Output of the private key contains Base64 encoded data of RSA components like mo
 ### Step 2: Generate a public key using openssl
 
 ```bash
-openssl rsa -in test_private_key.pem -pubout -out test_public_key.pem
+openssl rsa -in test_private_key.key -pubout -out test_public_key.key
 ```
 
 This command too generates key in PEM file format. Share this file to your recipients.
@@ -33,7 +33,7 @@ openssl dgst -sha256 -binary test.txt > test_hash.txt
 #### Step 3.2: Sign in HASH using private key using openssl
 
 ```bash
-openssl pkeyutl -sign -inkey test_private_key.pem -in test_hash.txt -out test_signature.bin
+openssl pkeyutl -sign -inkey test_private_key.key -in test_hash.txt -out test_signature.bin
 ```
 
 Send the digitally signed signature file (test_signature.bin) along with your original data file (test.txt) and HASH file (test_hash.txt).
@@ -43,7 +43,7 @@ Send the digitally signed signature file (test_signature.bin) along with your or
 As a recepient of the above file, to verify if the data is really signed by the expected sender, use the public key to get the HASH value and compare the HASH with the expected hash.
 
 ```bash
-openssl pkeyutl -verify -pubin -inkey test_public_key.pem -sigfile test_signature.bin -in test_hash.txt
+openssl pkeyutl -verify -pubin -inkey test_public_key.key -sigfile test_signature.bin -in test_hash.txt
 ```
 
 If the hash value matched with test_hash.txt file, then you get *Signature Verified Successfully* message.

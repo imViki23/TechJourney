@@ -7,7 +7,7 @@
 ### Step 1: Generate a private key using openssl
 
 ```bash
-openssl genrsa -out test_private_key.pem 2048
+openssl genrsa -out test_private_key.key 2048
 ```
 
 Output of the private key contains Base64 encoded data of RSA components like modulus and exponents in PEM file format. <sup>[(What is PEM file format?)](../../FAQ.md#what-is-pem-file-format)</sup>
@@ -15,7 +15,7 @@ Output of the private key contains Base64 encoded data of RSA components like mo
 ### Step 2: Generate a public key using openssl
 
 ```bash
-openssl rsa -in test_private_key.pem -pubout -out test_public_key.pem
+openssl rsa -in test_private_key.key -pubout -out test_public_key.key
 ```
 
 This command too generates key in PEM file format.
@@ -25,7 +25,7 @@ This command too generates key in PEM file format.
 #### Encrypting using openssl console
 
 ```bash
-openssl pkeyutl -encrypt -inkey test_public_key.pem -pubin -in test.txt -out test_encrypted_message.bin
+openssl pkeyutl -encrypt -inkey test_public_key.key -pubin -in test.txt -out test_encrypted_message.bin
 ```
 
 ### Step 4: Decrypt data using the private key
@@ -33,7 +33,7 @@ openssl pkeyutl -encrypt -inkey test_public_key.pem -pubin -in test.txt -out tes
 #### Decrypting using openssl console
 
 ```bash
-openssl pkeyutl -decrypt -inkey test_private_key.pem -in test_encrypted_message.bin -out test_decrypted_message.txt
+openssl pkeyutl -decrypt -inkey test_private_key.key -in test_encrypted_message.bin -out test_decrypted_message.txt
 ```
 
 ## FAQ's

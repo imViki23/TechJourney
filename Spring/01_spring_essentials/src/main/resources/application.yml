@@ -11,3 +11,11 @@ spring:
     defer-datasource-initialization: true # Without this script in data.sql won't execute
     hibernate:
       ddl-auto: "update" # This creates / updates tables
+
+server:
+  port: 8443
+  ssl:
+    key-store: classpath:vpk_keystore.jks
+    key-store-password: password123
+    key-store-type: JKS
+    key-alias: vpkalias
