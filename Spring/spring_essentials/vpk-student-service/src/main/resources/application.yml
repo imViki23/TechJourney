@@ -1,6 +1,6 @@
 spring:
   application:
-    name: "viki-university"
+    name: "vpk-student-service"
   h2:
     console:
       enabled: true

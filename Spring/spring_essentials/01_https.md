@@ -1,10 +1,10 @@
 # Setting up HTTPS for secure communication
 
-## Pre-requisites
+## 1. Pre-requisites
 
 1. [Generate JKS keystore file](../../Cryptography/03_keystore.md)
 
-## Steps
+## 2. Steps
 
 ### Step 1: Copy jks file
 
